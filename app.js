@@ -5,11 +5,11 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const session = require('express-session');
-
+let MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const passport = require('passport');
 const methodOverride = require('method-override');
-
+require('./lib/passport');
 require('dotenv').config();
 
 const Category = require('./routes/admin/categories/models/Category');
@@ -38,8 +38,9 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'))
 
 // app.use((req, res, next) => {
 //   Category.find({}, (err, categories) => {

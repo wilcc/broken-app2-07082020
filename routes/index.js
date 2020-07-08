@@ -26,9 +26,9 @@ const paginate = (req, res, next) => {
 
 router.get('/', function (req, res, next) {
   if (req.user) {
-    return res.render('main/home');
+    return paginate(req,res,next);
   }
-  // res.redirect('/api/users/register');
+  return res.render('main/home')
 });
 
 router.get('/page/:pageNumber', (req, res, next) => {

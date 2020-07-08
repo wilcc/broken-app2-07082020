@@ -8,11 +8,12 @@ const Product = require('./products/models/Product');
 const Category = require('./categories/models/Category');
 const checkCategory = require('./categories/utils/checkCategory');
 
+
 router.get('/add-category', (req, res, next) => {
   return res.render('admin/add-category');
 });
 
-router.post('/add-category', checkCategory, (req, res, next) => {
+router.post('/add-category', checkCategory,(req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     // return res.status(422).json({ errors: errors.array() });
@@ -37,6 +38,7 @@ router.post('/add-category', checkCategory, (req, res, next) => {
       } else {
         return next(err);
       }
+
     });
 });
 
@@ -51,6 +53,7 @@ router.get('/create-product/:name', (req, res, next) => {
     },
     (category) => {
       for (let i = 0; i < 24; i++) {
+        const product = new Product()
         product.category = category._id;
         product.name = faker.commerce.productName();
         product.price = faker.commerce.price();

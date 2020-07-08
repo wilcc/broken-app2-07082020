@@ -12,7 +12,7 @@ router.get('/all-products/:id', (req, res, next) => {
 
 router.get('/single-product/:id', (req, res, next) => {
   Product.findById({ _id: req.params.id }).then((foundProduct) => {
-    return res.rider('main/single-product', { product: foundProduct });
+    return res.render('main/single-product', { product: foundProduct });
   });
 });
 

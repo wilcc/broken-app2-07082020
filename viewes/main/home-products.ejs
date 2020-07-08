@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <title>Online Shopper</title>
+  </head>
+
+  <body>
+ 
+
+    <div class="fluid" id="container">
+      <main role="main">
+        <div class="jumbotron my-jumbotron">
+          <h1 class="display-1 my-h1">ONLINE SHOPPER</h1>
+          <h4 class="display-5">Your Home Shopping Service</h4>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <% for( let i = 0; i < products.length; i++ ) { %>
+            <div class="col-md-4" style="margin-bottom: 30px;">
+              <div class="card" style="border-radius: 0;">
+                <a
+                  href="/api/products/single-product/<%=products[i]._id%>"
+                  style="text-decoration: none; color: #000;"
+                >
+                  <img
+                    src="<%=products[i].image%>"
+                    alt="..."
+                    class="card-img-top"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title"><%= products[i].name %></h5>
+                    <p class="card-text">
+                      Category: <%=products[i].category.name %>
+                    </p>
+                    <a href="#" class="btn btn-success">Buy Now</a>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <% } %>
+          </div>
+          <div style="display: block;">
+            <ul class="pagination text-center" >
+              <% for( let j = 1; j <=pages; j++ ) {if(j===1) {%>
+              <li class="my-pagination" style="padding-right:5px;"><a href="/"><%= j %> </a> |
+              </li>
+              <% }else{ %>
+              <li class="my-pagination" style="padding-right:5px;">
+                <a href="/page/<%= j %>"><%= j %> </a> |
+              </li>
+              <%}}%>
+            </ul>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <% include ../partials/footer %> 
+  </body>
+</html>

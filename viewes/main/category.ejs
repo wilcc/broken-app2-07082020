@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <title><%= products[0].category.name%> - Online Shopper</title>
+  </head>
+  <body>
+    <% include ../partials/navbar %>
+    <div class="fluid" id="container">
+      <main role="main">
+        <% include ../partials/jumbotron %>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 my-category">
+              <h1>Category: <%= products[0].category.name %></h1>
+            </div>
+
+            <% for( let i = 0; i < 24; i++ ) { %>
+            <div class="col-md-4" style="margin-bottom: 30px;">
+              <div class="card" style="width: 20rem;">
+                <a href="/api/products/single-product/<%=products[i]._id%>" style="text-decoration: none;">
+                  <img
+                    class="card-img-top"
+                    src="<%= products[i].image%>"
+                    alt="..."
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title"><%= products[i].name %></h5>
+                    <p class="card-text">
+                      $<%= products[i].price %>
+                    </p>
+                    <br />
+                    <a href="#" class="btn btn-success">Buy Now</a>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </main>
+      <% include ../partials/footer %> 
+    </div>
+    <% include ../partials/scripts %> 
+  </body>
+</html>

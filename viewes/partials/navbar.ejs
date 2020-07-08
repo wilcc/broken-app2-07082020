@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <img src="/images/shopping_logo.png" style="width: 75px; height: 50px;" />
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <% if (user) { %>
+      <li style="margin-left: 20px;" class="nav-item dropdown">
+        <a
+          style="color: white;"
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="dropdown01"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          >Categories</a
+        >
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <ul>
+            <% for( let i = 0; i < categories.length; i++ ) { %>
+            <li style="list-style: none;">
+              <a
+                href="/api/products/all-products/<%=categories[i]._id%>"
+                class="nav-category-list"
+                style="color: black; text-decoration: none;"
+              >
+                <%= categories[i].name %>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item active" style="padding-left: 15px;">
+        <a href="/api/admin/add-category" class="nav-link">Create Category</a>
+      </li>
+      <% } %>
+    </ul>
+    <% if (!user) { %>
+    <span style="color: white; padding-left: 20px;"
+      ><a style="color: white;" href="/api/users/register">Register</a>/<a
+        style="color: white;"
+        href="/api/users/login"
+        >Login</a
+      ></span
+    >
+
+    <% }else{ %>
+    <span style="color: #ee802e;">
+      Hello &nbsp;<a style="color: #ee802e;" href="/api/users/profile"
+        ><%=user.profile.name.toUpperCase()%></a
+      >&nbsp;|&nbsp;</span
+    >
+    <span><a style="color: white;" href="/logout">Logout</a></span>
+    <% } %>
+  </div>
+</nav>
